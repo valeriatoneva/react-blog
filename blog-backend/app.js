@@ -9,7 +9,6 @@ const fs = require('fs');
 
 const app = express();
 
-// Configure multer for image uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, 'img/');
@@ -29,7 +28,7 @@ app.use('/img', express.static('img'));
 // CRUD
 
 app.post('/posts',
-  upload.single('image'), // 'image' is the name of the field in the form
+  upload.single('image'), 
   body('title').isLength({ min: 1 }).trim().escape(),
   body('content').isLength({ min: 1 }).trim().escape(),
   (req, res) => {
@@ -39,7 +38,7 @@ app.post('/posts',
     }
 
     const { title, content } = req.body;
-    const img = req.file ? req.file.filename : null; // Only store the filename
+    const img = req.file ? req.file.filename : null; 
 
     const sql = `INSERT INTO posts (title, content, img) VALUES (?, ?, ?)`;
     db.run(sql, [title, content, img], function(err) {
@@ -79,7 +78,7 @@ app.get('/posts/:id', (req, res) => {
 
 // update a post
 app.put('/posts/:id', 
-  upload.single('image'), // Handle image upload
+  upload.single('image'), 
   body('title').optional().isLength({ min: 1 }).trim().escape(),
   body('content').optional().isLength({ min: 1 }).trim().escape(),
   (req, res) => {
@@ -90,9 +89,9 @@ app.put('/posts/:id',
 
     const { title, content } = req.body;
     const id = req.params.id;
-    const img = req.file ? req.file.filename : null; // Get the new filename
+    const img = req.file ? req.file.filename : null; 
 
-    // Update logic with file replacement
+
     db.get(`SELECT img FROM posts WHERE id = ?`, id, (err, row) => {
       if (err) {
         return res.status(500).json({ error: err.message });
@@ -104,7 +103,6 @@ app.put('/posts/:id',
           return res.status(500).json({ error: updateErr.message });
         }
 
-        // Delete the old image if a new one was uploaded
         if (img && row.img) {
           fs.unlink(`img/${row.img}`, unlinkErr => {
             if (unlinkErr) {

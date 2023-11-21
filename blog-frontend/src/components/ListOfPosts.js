@@ -51,7 +51,7 @@ function ListOfPosts() {
             } finally {
                 setDeleting(null); 
             }
-        }, 300); 
+        }, 500); 
     };
 
     return (
