@@ -1,0 +1,113 @@
+.update-post-container {
+    max-width: 700px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.update-post-container h1 {
+    color: #333;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 2rem;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    border-color: #88aaff;
+    outline: none;
+}
+
+.form-group textarea {
+    height: 200px;
+    resize: none;
+}
+
+.file-input input[type="file"] {
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    border: 2px dashed #ccc;
+    border-radius: 6px;
+    margin-top: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.file-input input[type="file"]:hover,
+.file-input input[type="file"]:focus {
+    border-color: #88aaff;
+}
+
+.file-name {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.submit-button {
+    padding: 12px 20px;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 15px;
+}
+
+.submit-button:hover {
+    background-color: #4cae4c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .update-post-container {
+        padding: 20px;
+    }
+
+    .update-post-container h1 {
+        font-size: 1.8rem;
+    }
+
+    .edit-form .form-group {
+        margin-bottom: 15px;
+    }
+
+    .submit-button {
+        padding: 10px 15px;
+    }
+}
