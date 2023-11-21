@@ -70,6 +70,26 @@
   .blog-post li {
     margin-bottom: 0.25em;
   }
+
+  .error-message {
+    text-align: center;
+    color: #dc3545; 
+    background-color: #f8d7da; 
+    border-color: #f5c2c7;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    font-size: 1.2em;
+  }
+  
+  @media (max-width: 600px) {
+    .error-message {
+      font-size: 1em;
+      padding: 15px;
+    }
+  }
+  
   
   /* Responsive Images */
   @media (max-width: 768px) {

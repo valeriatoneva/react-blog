@@ -46,7 +46,7 @@ p {
   padding: 20px;
   transition: opacity 0.5s ease, max-height 0.5s ease, padding 0.5s ease, margin 0.5s ease;
   opacity: 1;
-  max-height: 200px; /* Adjust this value based on the maximum height your post items could have */
+  max-height: 200px; 
 }
 
 .post-item.deleting {

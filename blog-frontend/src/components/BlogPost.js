@@ -2,18 +2,35 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import '../css/BlogPost.css'; 
 
-
 function BlogPost() {
   const [post, setPost] = useState(null);
+  const [postDeleted, setPostDeleted] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
     fetch(`http://localhost:3001/posts/${id}`)
-      .then(response => response.json())
-      .then(data => setPost(data));
+      .then(response => {
+        if (response.status === 404) {
+          setPostDeleted(true);
+          return null;
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data) {
+          setPost(data);
+        }
+      })
+      .catch(error => console.error('Error fetching post:', error));
   }, [id]);
 
-  if (!post) return <div>Loading...</div>;
+  if (postDeleted) {
+    return <div className="error-message">Ha! Yeah, I thought about this as well... The post is gone, can't go back.</div>;
+  }
+
+  if (!post) {
+    return <div>Loading...</div>;
+  }
 
   // formatting the date
   const formatDate = (dateString) => {
@@ -35,4 +52,3 @@ function BlogPost() {
 }
 
 export default BlogPost;
-
