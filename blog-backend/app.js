@@ -122,18 +122,40 @@ app.put('/posts/:id',
 
 // delete a post
 app.delete('/posts/:id', (req, res) => {
-    const id = req.params.id;
-    const sql = `DELETE FROM posts WHERE id = ?`;
-    db.run(sql, id, function(err) {
-        if (err) {
-            return res.status(500).json({ error: err.message });
-        }
-        if (this.changes === 0) {
-            return res.status(404).json({ error: "Post not found" });
-        }
-        res.status(200).json({ message: `Row(s) deleted: ${this.changes}` });
+  const id = req.params.id;
+  const sql = `DELETE FROM posts WHERE id = ?`;
+  const sqlTwo = `SELECT img FROM posts WHERE id = ?`;
+
+  db.get(sqlTwo, id, (err, row) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+
+    db.run(sql, id, function (err) {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+
+      if (this.changes === 0) {
+        return res.status(404).json({ error: "Post not found" });
+      }
+
+      const img = row ? row.img : null;
+
+      if (img) {
+        fs.unlink(`img/${img}`, unlinkErr => {
+          if (unlinkErr) {
+            console.error(unlinkErr);
+          }
+          console.log('Successfully deleted old image.');
+        });
+      }
+
+      res.status(200).json({ message: `Row(s) deleted: ${this.changes}` });
     });
+  });
 });
+
 
 
 
